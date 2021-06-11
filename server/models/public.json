@@ -1,0 +1,14 @@
+{
+  "name": "Public",
+  "plural": "public",
+  "base": "PersistedModel",
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [
+  ],
+  "methods": {}
+}

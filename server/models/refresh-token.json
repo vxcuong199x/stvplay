@@ -1,0 +1,88 @@
+{
+  "name": "RefreshToken",
+  "plural": "refresh-token",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "uniqueId": {
+      "keys": {
+        "username": 1,
+        "deviceId": 1
+      },
+      "options": {
+        "unique": true
+      }
+    },
+    "expire": {
+      "keys": {
+        "createdAt": -1
+      },
+      "options": {
+        "expireAfterSeconds": 8640000
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true,
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "deviceId": {
+      "type": "string",
+      "required": true
+    },
+    "token": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ]
+}

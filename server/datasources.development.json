@@ -1,0 +1,50 @@
+{
+  "mongo": {
+    "url": "mongodb://127.0.0.1:27017/sctv-ott-test",
+    "name": "mongo",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
+  },
+  "mongo-authen": {
+    "url": "mongodb://127.0.0.1:27017/sctv-ott-authen",
+    "name": "mongo-authen",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "name": "redis",
+    "db": 2
+  },
+  "redisPushInApp": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "name": "redis",
+    "db": 3
+  },
+  "redisPushOnline": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "name": "redis",
+    "db": 4
+  },
+  "redisSession": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "name": "redisSession"
+  },
+  "rabbitmq": {
+    "url": "amqp://sctvott:e9Nzb1R3azvUQWea@172.16.20.30:5672",
+    "name": "rabbitmq"
+  },
+  "elastic": {
+    "host": "172.16.20.54:9200",
+    "name": "elastic"
+  },
+  "logstash": {
+    "name": "sctv-ott",
+    "host": "172.16.20.63",
+    "port": "9998"
+  }
+}

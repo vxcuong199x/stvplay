@@ -1,0 +1,71 @@
+{
+  "name": "BlockUser",
+  "plural": "block-user",
+  "base": "PersistedModel",
+  "strict": true,
+  "indexes": {
+    "expire": {
+      "keys": {
+        "createdAt": -1
+      },
+      "options": {
+        "expireAfterSeconds": 120
+      }
+    },
+    "username": {
+      "keys": {
+        "username": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "mixins": {
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 200
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "createdAt": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

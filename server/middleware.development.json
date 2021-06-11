@@ -1,0 +1,38 @@
+{
+  "initial": {
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    },
+    "helmet#hidePoweredBy": {},
+    "body-parser#json": {},
+    "body-parser#urlencoded": {"params": { "extended": true }},
+    "./middleware/encrypt-and-logger": {}
+  },
+  "session": {},
+  "auth": {
+    "loopback#token": {
+      "params": {
+        "model": "CustomerToken"
+      }
+    }
+  },
+  "parse": {},
+  "routes": {
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
+  },
+  "files": {},
+  "final": {
+    "loopback#urlNotFound": {}
+  },
+  "final:after": {
+    "strong-error-handler": {}
+  }
+}

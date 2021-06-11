@@ -1,0 +1,162 @@
+{
+  "name": "ChannelProgram",
+  "plural": "channel-program",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "homeOrder": {
+      "keys": {
+        "activated": 1,
+        "homeOrder": 1
+      }
+    },
+    "channelId": {
+      "keys": {
+        "channelId": 1
+      }
+    },
+    "expire": {
+      "keys": {
+        "livedAt": -1
+      },
+      "options": {
+        "expireAfterSeconds": 604800
+      }
+    },
+    "unique": {
+      "keys": {
+        "channelId": 1,
+        "livedAt": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 200
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "DefaultFindField": {
+      "fields": [
+        "id",
+        "name",
+        "channelId",
+        "livedAt",
+        "banner",
+        "thumbnail",
+        "duration"
+      ]
+    },
+    "Cache": {
+      "type": "redis",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById"
+      ]
+    }
+  },
+  "hidden": [
+    "createdAt",
+    "updatedAt",
+    "activated"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "channelId": {
+      "type": "string",
+      "required": true
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    },
+    "activatedStore": {
+      "type": "boolean",
+      "default": true
+    },
+    "livedAt": {
+      "type": "date",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "object"
+    },
+    "banner": {
+      "type": [
+        "number"
+      ]
+    },
+    "homeOrder": {
+      "type": "number",
+      "default": 0
+    },
+    "duration": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "channel": {
+      "type": "belongsTo",
+      "model": "Channel",
+      "foreignKey": "channelId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

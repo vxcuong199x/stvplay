@@ -1,0 +1,108 @@
+{
+  "name": "AddCoinLog",
+  "plural": "add-coin-log",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "userIndex": {
+      "keys": {
+        "userId": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "targetId": {
+      "type": "string",
+      "required": true
+    },
+    "targetName": {
+      "type": "string",
+      "required": true
+    },
+    "coin": {
+      "type": "number",
+      "required": true
+    },
+    "dtId": {
+      "type": "number",
+      "required": true
+    },
+    "spId": {
+      "type": "number"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "comment": "1: add npp, 2: add daily, 3: add user"
+    },
+    "day": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "daily",
+      "permission": "ALLOW"
+    }
+  ]
+}

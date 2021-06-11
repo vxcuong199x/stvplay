@@ -1,0 +1,117 @@
+{
+  "name": "ChannelCatalog",
+  "plural": "channel-catalog",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "rankIndex": {
+      "keys": {
+        "activated": 1,
+        "rank": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        },
+        "order": "rank ASC"
+      }
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "DefaultFindField": {
+      "fields": [
+        "id",
+        "name",
+        "isOpen"
+      ]
+    },
+    "Cache": {
+      "type": "memcache",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById"
+      ]
+    }
+  },
+  "hidden": [
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "isOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "rank": {
+      "type": "number",
+      "default": 0
+    },
+    "logo": {
+      "type": "number"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

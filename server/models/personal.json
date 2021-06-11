@@ -1,0 +1,76 @@
+{
+  "name": "Personal",
+  "plural": "personal",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "username": {
+      "keys": {
+        "username": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true,
+    "ReadOnly": {
+      "only": [
+        "channels",
+        "movies",
+        "clip"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    }
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "channels": {
+      "type": "object",
+      "default": {}
+    },
+    "movies": {
+      "type": "object",
+      "default": {}
+    },
+    "buyMovie": {
+      "type": "object",
+      "default": {}
+    },
+    "clips": {
+      "type": "object",
+      "default": {}
+    },
+    "buyClip": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

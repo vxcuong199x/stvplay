@@ -1,0 +1,121 @@
+{
+  "name": "GiftCode",
+  "plural": "gift-code",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "code": {
+      "keys": {
+        "code": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 1000
+    },
+    "StaticUpdate": true,
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "groupId": {
+      "type": "string",
+      "required": true
+    },
+    "time": {
+      "type": "string",
+      "required": true,
+      "default": "P30D"
+    },
+    "packageTypeId": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 1,
+      "comment": "(1: active, 2: sent, 3: received)"
+    },
+    "price": {
+      "type": "number",
+      "default": 0
+    },
+    "dtId": {
+      "type": "number",
+      "default": 1
+    },
+    "username": {
+      "type": "string"
+    },
+    "applyAt": {
+      "type": "date"
+    },
+    "expiredAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "enterGiftCode"
+    }
+  ],
+  "methods": {}
+}

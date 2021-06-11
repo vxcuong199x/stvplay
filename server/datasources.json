@@ -1,0 +1,143 @@
+{
+  "mongo": {
+    "url": "mongodb://mongodb01:3337,mongodb02:3337,mongodb03:3337/ott?replicaSet=prodRepl&readPreference=nearest&maxPoolSize=100&connectTimeoutMS=20000",
+    "name": "mongo",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
+  },
+  "mongo-authen": {
+    "url": "mongodb://mongodb01:3337,mongodb02,mongodb03:3337:3337/ott-authen?replicaSet=prodRepl&readPreference=nearest&maxPoolSize=100&connectTimeoutMS=20000",
+    "name": "mongo-authen",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
+  },
+  "redis": {
+    "name": "redis",
+    "cluster": [
+      {
+        "host": "172.16.10.43",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.43",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6380
+      }
+    ]
+  },
+  "redisPushInApp": {
+    "name": "redis",
+    "cluster": [
+      {
+        "host": "172.16.10.43",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.43",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6380
+      }
+    ]
+  },
+  "redisPushOnline": {
+    "name": "redisPushOnline",
+    "cluster": [
+      {
+        "host": "172.16.10.43",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.43",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6380
+      }
+    ]
+  },
+  "redisSession": {
+    "name": "redisSession",
+    "cluster": [
+      {
+        "host": "172.16.10.43",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.43",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.44",
+        "port": 6380
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6379
+      },
+      {
+        "host": "172.16.10.45",
+        "port": 6380
+      }
+    ]
+  },
+  "rabbitmq": {
+    "url": "amqp://sctvott:e9Nzb1R3azvUQWea@172.16.20.30:5672",
+    "name": "rabbitmq"
+  },
+  "elastic": {
+    "host": "172.16.20.31:9200",
+    "name": "elastic"
+  },
+  "logstash": {
+    "name": "sctv-ott",
+    "host": "172.16.20.63",
+    "port": "9998"
+  }
+}

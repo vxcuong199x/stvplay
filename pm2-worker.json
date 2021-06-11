@@ -1,0 +1,17 @@
+[
+  {
+    "name": "worker",
+    "script": "./server/worker.js",
+    "error_file": "./log/worker.log",
+    "out_file": "./log/worker.log",
+    "pid_file": "./log/worker.pid",
+    "exec_mode": "fork_mode", //cluster_mode
+    "instances" : "1",
+    "watch": true,
+    "ignore_watch": ["log", "node_modules"],
+    "max_memory_restart" : "800M",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+]

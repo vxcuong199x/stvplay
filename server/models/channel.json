@@ -1,0 +1,260 @@
+{
+  "name": "Channel",
+  "plural": "channel",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "homeOrder": {
+      "keys": {
+        "activated": 1,
+        "homeOrder": 1
+      }
+    },
+    "index": {
+      "keys": {
+        "index": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findAll",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll",
+        "__get__programs",
+        "__create__programs",
+        "__delete__programs",
+        "__findById__programs",
+        "__destroyById__programs",
+        "__updateById__programs",
+        "__count__programs",
+        "__link__catalogs",
+        "__unlink__catalogs",
+        "__count__catalogs",
+        "__findById__catalogs"
+      ]
+    },
+    "StaticUpdate": true,
+    "ResultsetLimit": {
+      "limit": 200
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        }
+      }
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "DefaultFindField": {
+      "fields": [
+        "id",
+        "name",
+        "thumbnail",
+        "banner",
+        "logo",
+        "viewerCount",
+        "hd",
+        "vip",
+        "keywords",
+        "packageCode",
+        "channelCatalogIds",
+        "index",
+        "icon",
+        "isSecure",
+        "source",
+        "source_secue"
+      ]
+    },
+    "Cache": {
+      "type": "memcache",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById"
+      ]
+    }
+  },
+  "hidden": [
+    "updatedAt"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "banner": {
+      "type": [
+        "number"
+      ],
+      "default": []
+    },
+    "source": {
+      "type": "string",
+      "required": true
+    },
+    "source_secue": {
+      "type": "string"
+    },
+    "oldId": {
+      "type": "string"
+    },
+    "thumbnail": {
+      "type": "object",
+      "required": true
+    },
+    "logo": {
+      "type": "number"
+    },
+    "icon": {
+      "type": "number"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    },
+    "activatedStore": {
+      "type": "boolean",
+      "default": true
+    },
+    "subscriberCount": {
+      "type": "number",
+      "default": 0
+    },
+    "keywords": {
+      "type": [
+        "string"
+      ]
+    },
+    "packageCode": {
+      "type": "string",
+      "default": "FREE"
+    },
+    "viewerCount": {
+      "type": "number",
+      "default": 0
+    },
+    "homeOrder": {
+      "type": "number",
+      "default": 0
+    },
+    "resolution": {
+      "type": "string",
+      "default": "HD"
+    },
+    "hd": {
+      "type": "boolean",
+      "default": false
+    },
+    "vip": {
+      "type": "boolean",
+      "default": false
+    },
+    "isSecure": {
+      "type": "boolean",
+      "default": true
+    },
+    "h265": {
+      "type": "boolean",
+      "default": false
+    },
+    "p2p": {
+      "type": "boolean",
+      "default": false
+    },
+    "drmURL": {
+      "type": "string"
+    },
+    "drmSecret": {
+      "type": "string"
+    },
+    "showPhone": {
+      "type": "boolean",
+      "default": false
+    },
+    "maintenance": {
+      "type": "boolean",
+      "default": false
+    },
+    "showPhoneInterval": {
+      "type": "number",
+      "default": 0
+    },
+    "showPhoneTime": {
+      "type": "number",
+      "default": 0
+    },
+    "index": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "catalogs": {
+      "type": "referencesMany",
+      "model": "ChannelCatalog",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "programs": {
+      "type": "hasMany",
+      "model": "ChannelProgram",
+      "foreignKey": "channelId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

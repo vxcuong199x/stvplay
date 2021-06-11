@@ -1,0 +1,47 @@
+{
+  "name": "Counter",
+  "plural": "counter",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "key": {
+      "keys": {
+        "deviceId": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "count": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ]
+}

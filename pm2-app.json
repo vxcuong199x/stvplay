@@ -1,0 +1,17 @@
+[
+  {
+    "name": "app",
+    "script": ".",
+    "error_file": "./log/app-err.log",
+    "out_file": "./log/app-out.log",
+    "pid_file": "./log/app.pid",
+    "exec_mode": "cluster_mode", //cluster_mode
+    "instances" : "max",
+    "watch": true,
+    "ignore_watch": ["log", "node_modules"],
+    "max_memory_restart" : "800M",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+]

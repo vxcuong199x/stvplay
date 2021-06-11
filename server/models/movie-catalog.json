@@ -1,0 +1,131 @@
+{
+  "name": "MovieCatalog",
+  "plural": "movie-catalog",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "rankIndex": {
+      "keys": {
+        "activated": 1,
+        "rank": 1
+      }
+    },
+    "parentIndex": {
+      "keys": {
+        "activated": 1,
+        "parentId": 1,
+        "rank": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        },
+        "order": "rank ASC"
+      }
+    },
+    "DefaultFindField": {
+      "fields": [
+        "id",
+        "name",
+        "logo",
+        "rank"
+      ]
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "Cache": {
+      "type": "memcache",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById"
+      ]
+    }
+  },
+  "hidden": [
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "activated": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "rank": {
+      "type": "number",
+      "default": 0
+    },
+    "logo": {
+      "type": "number"
+    },
+    "orientation": {
+      "type": "number",
+      "default": 1,
+      "comment": "1: landscape, 2: portrait"
+    },
+    "parentId": {
+      "type": "any"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

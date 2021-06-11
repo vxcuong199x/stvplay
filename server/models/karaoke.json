@@ -1,0 +1,124 @@
+{
+  "name": "Karaoke",
+  "plural": "karaoke",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "activated": {
+      "keys": {
+        "activated": 1
+      }
+    },
+    "index": {
+      "keys": {
+        "index": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true,
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 100
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "vocal": {
+      "type": "number"
+    },
+    "source": {
+      "type": "string"
+    },
+    "singer": {
+      "type": "string"
+    },
+    "singerType": {
+      "type": "number"
+    },
+    "volume": {
+      "type": "number"
+    },
+    "language": {
+      "type": "string"
+    },
+    "nameCompress": {
+      "type": "string"
+    },
+    "singerCompress": {
+      "type": "string"
+    },
+    "catalog": {
+      "type": "number"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    },
+    "index": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["search", "getSource", "getFavorite", "getFavoriteIds"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["like", "unlike"]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "upload",
+    "script": ".",
+    "error_file": "./log/upload-err.log",
+    "out_file": "./log/upload-out.log",
+    "pid_file": "./log/upload.pid",
+    "exec_mode": "cluster_mode", //cluster_mode
+    "instances" : "max",
+    "watch": true,
+    "ignore_watch": ["log", "node_modules"],
+    "max_memory_restart" : "800M",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+]

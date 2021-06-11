@@ -1,0 +1,84 @@
+{
+  "name": "HotUpdate",
+  "plural": "hot-update",
+  "base": "PersistedModel",
+  "strict": true,
+  "indexes": {
+    "nativeVersion": {
+      "keys": {
+        "platform": 1,
+        "nativeVersion": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "mixins": {
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 200
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "platform": {
+      "type": "number",
+      "required": true
+    },
+    "nativeVersion": {
+      "type": "number",
+      "required": true
+    },
+    "jsVersion": {
+      "type": "number",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

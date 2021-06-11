@@ -1,0 +1,62 @@
+<style>
+  body {
+    background-color: black;
+    color: white;
+    font-size: 13px;
+    font-family: Roboto, sans-serif;
+    font-weight: lighter;
+  }
+  table {
+    width: 96%;
+    margin: auto;
+    border-collapse: collapse;
+  }
+  table td {
+    padding: 2px 4px;
+    border: 1px solid #555;
+    text-align: center;
+  }
+  .right {
+    text-align: right;
+  }
+  .center {
+    text-align: center;
+  }
+  table th {
+    border: 1px solid #555;
+    border-bottom: 1px solid #999;
+    padding: 4px 4px;
+    font-weight: bold;
+  }
+</style>
+
+<table>
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Thời gian</th>
+    <th>Gói (phim)</th>
+    <th>Số tháng</th>
+    <th>Thiết bị</th>
+    <th>Loại</th>
+    <th>Số tiền (VNĐ)</th>
+    <th>Trạng thái</th>
+    <th>Tiền còn (VNĐ)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <? let i = 0; data.forEach(function(item) { ?>
+  <tr>
+    <td><?= ++i ?></td>
+    <td><?= moment(item.time).format('DD/MM/YYYY HH:mm') ?></td>
+    <td><?= item.name || item.package ?></td>
+    <td class="center"><?= item.month ?></td>
+    <td class="center"><?= item.maxDevice ?></td>
+    <td><?= transactionMap[item.type] || '' ?></td>
+    <td class="right"><?= numeral(item.amount).format('0,0') ?></td>
+    <td><?= transactionStatusMap[item.status] || '' ?></td>
+    <td class="right"><?= numeral(item.after).format('0,0') ?></td>
+  </tr>
+  <? }); ?>
+  </tbody>
+</table>

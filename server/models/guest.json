@@ -1,0 +1,181 @@
+{
+  "name": "Guest",
+  "plural": "guest",
+  "idInjection": true,
+  "indexes": {
+    "deviceId": {
+      "keys": {
+        "deviceId": 1
+      },
+      "options": {
+        "unique": true
+      }
+    },
+    "guestId": {
+      "keys": {
+        "guestId": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "hidden": [
+    "createdAt",
+    "updatedAt"
+  ],
+  "mixins": {
+    "CmsLog": {},
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "StaticUpdate": true,
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "RemoteRouting": {
+      "only": [
+        "@enter",
+        "updateAttributes",
+        "@findOne",
+        "@create",
+        "@find",
+        "@count",
+        "@deleteById",
+        "@findById"
+      ]
+    },
+    "CheckSignature": {
+      "methods": [
+        {
+          "method": "enter",
+          "fields": [
+            "deviceId",
+            "deviceType",
+            "mac"
+          ]
+        }
+      ]
+    }
+  },
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "required": true
+    },
+    "deviceName": {
+      "type": "string",
+      "required": true
+    },
+    "guestId": {
+      "type": "number"
+    },
+    "dtId": {
+      "type": "number",
+      "default": 1
+    },
+    "lastDtId": {
+      "type": "number",
+      "default": 1
+    },
+    "spId": {
+      "type": "number",
+      "default": 1
+    },
+    "platform": {
+      "type": "number",
+      "default": 1
+    },
+    "deviceType": {
+      "type": "number",
+      "default": 1
+    },
+    "deviceToken": {
+      "type": "string"
+    },
+    "freeUntil": {
+      "type": "number",
+      "default": 0
+    },
+    "lastLogin": {
+      "type": "date"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "mac": {
+      "type": "string"
+    },
+    "isPreset": {
+      "type": "number",
+      "default": 0
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "cskh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "ketoan",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "daily",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": ["enter"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

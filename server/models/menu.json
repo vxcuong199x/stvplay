@@ -1,0 +1,119 @@
+{
+  "name": "Menu",
+  "plural": "menu",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "activated": {
+      "keys": {
+        "activated": 1,
+        "rank": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@getList",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 100
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        },
+        "order": [
+          "rank ASC"
+        ]
+      }
+    },
+    "Cache": {
+      "type": "memcache",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById"
+      ]
+    }
+  },
+  "hidden": [
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": 1,
+      "comment": "1: channel, 2: movie, 4: clip, 5: tài khoản"
+    },
+    "rank": {
+      "type": "number",
+      "default": 0
+    },
+    "parentId": {
+      "type": "string"
+    },
+    "refreshTime": {
+      "type": "number",
+      "default": 300
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

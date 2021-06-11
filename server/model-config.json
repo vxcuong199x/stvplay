@@ -1,0 +1,230 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
+      "../node_modules/loopback-readonly-mixin",
+      "../node_modules/loopback-ds-resultset-limit-mixin",
+      "../node_modules/loopback-remote-routing"
+    ]
+  },
+  "User": {
+    "dataSource": "mongo-authen"
+  },
+  "Admin": {
+    "dataSource": "mongo-authen",
+    "public": true
+  },
+  "CmsUser": {
+    "dataSource": "mongo-authen",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "mongo-authen",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongo-authen",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongo-authen",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongo-authen",
+    "public": false
+  },
+  "ChannelCatalog": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Channel": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "ChannelProgram": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "MovieCatalog": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Movie": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "MovieEpisode": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "ClipCatalog": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Clip": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "ClipEpisode": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Customer": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "CustomerToken": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "Home": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Menu": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Slide": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Config": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Notification": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Personal": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Transaction": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "GiftCode": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "CardTransaction": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "PackageGroup": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "PackageType": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "ClientLog": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "ErrorLog": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Feedback": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Distributor": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Distributor2": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Proxy": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "CmsLog": {
+    "dataSource": "mongo-authen",
+    "public": true
+  },
+  "AddCoinLog": {
+    "dataSource": "mongo-authen",
+    "public": true
+  },
+  "ShowPhoneChannel": {
+    "dataSource": "mongo-authen",
+    "public": false
+  },
+  "MaintenanceChannel": {
+    "dataSource": "mongo-authen",
+    "public": true
+  },
+  "BlockUser": {
+    "dataSource": "mongo-authen",
+    "public": false
+  },
+  "HotUpdate": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "TelcoMap": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "BlacklistIp": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "BlacklistUsername": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Ads": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Public": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Video": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "RefreshToken": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "FreeMac": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Guest": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Counter": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "Karaoke": {
+    "dataSource": "mongo",
+    "public": true
+  }
+}

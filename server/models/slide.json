@@ -1,0 +1,146 @@
+{
+  "name": "Slide",
+  "plural": "slide",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "rankIndex": {
+      "keys": {
+        "activated": 1,
+        "rank": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        },
+        "order": [
+          "rank ASC"
+        ]
+      }
+    },
+    "DefaultFindField": {
+      "fields": [
+        "id",
+        "name",
+        "foreignId",
+        "type",
+        "description",
+        "time",
+        "logo",
+        "background",
+        "mobileBackground"
+      ]
+    },
+    "Cache": {
+      "type": "memcache",
+      "expire": 180,
+      "methods": [
+        "find"
+      ]
+    }
+  },
+  "hidden": [
+    "createdAt",
+    "updatedAt",
+    "activated",
+    "router",
+    "query"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "number",
+      "default": 1,
+      "comment": "1: channel, 2: movie, 3: clip"
+    },
+    "foreignId": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "number"
+    },
+    "background": {
+      "type": "number"
+    },
+    "mobileBackground": {
+      "type": "number"
+    },
+    "rank": {
+      "type": "number",
+      "default": 0
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    },
+    "activatedStore": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

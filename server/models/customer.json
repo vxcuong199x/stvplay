@@ -1,0 +1,265 @@
+{
+  "name": "Customer",
+  "plural": "customer",
+  "base": "User",
+  "idInjection": true,
+  "indexes": {
+    "username": {
+      "keys": {
+        "username": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "protected": [
+    "status",
+    "phone",
+    "ip"
+  ],
+  "hidden": [
+    "updatedAt"
+  ],
+  "mixins": {
+    "CmsLog": {},
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "StaticUpdate": true,
+    "ReadOnly": {
+      "only": [
+        "lastLogin",
+        "coin",
+        "freeCoin"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "RemoteRouting": {
+      "only": [
+        "@enter",
+        "@loginOTP",
+        "@logout",
+        "updateAttributes",
+        "@findOne",
+        "@create",
+        "@find",
+        "@count",
+        "@deleteById",
+        "@findById",
+        "__count__transactions",
+        "__create__transactions",
+        "__findById__transactions",
+        "__get__transactions"
+      ]
+    },
+    "CheckSignature": {
+      "methods": [
+        {
+          "method": "enter",
+          "fields": [
+            "username",
+            "deviceId"
+          ]
+        },
+        {
+          "method": "verifyOTP",
+          "fields": [
+            "username",
+            "deviceId",
+            "deviceType",
+            "otp",
+            "session"
+          ]
+        },
+        {
+          "method": "enterGuest",
+          "fields": [
+            "deviceId",
+            "deviceType"
+          ]
+        }
+      ]
+    }
+  },
+  "properties": {
+    "credentials": false,
+    "password": false,
+    "challenges": false,
+    "realm": false,
+    "created": false,
+    "email": false,
+    "strict": {
+      "type": true
+    },
+    "lastUpdated": false,
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "coin": {
+      "type": "number",
+      "default": 0
+    },
+    "freeCoin": {
+      "type": "number",
+      "default": 0
+    },
+    "dtId": {
+      "type": "number",
+      "default": 1
+    },
+    "lastDtId": {
+      "type": "number",
+      "default": 1
+    },
+    "spId": {
+      "type": "number",
+      "default": 1
+    },
+    "platform": {
+      "type": "number",
+      "default": 1
+    },
+    "deviceType": {
+      "type": "number",
+      "default": 1
+    },
+    "packages": {
+      "type": "array",
+      "default": []
+    },
+    "maxDevice": {
+      "type": "number",
+      "default": 1
+    },
+    "hasGiftCode": {
+      "type": "number",
+      "default": 0
+    },
+    "prCode": {
+      "type": "string"
+    },
+    "totalCharge": {
+      "type": "number",
+      "default": 0
+    },
+    "expireAt": {
+      "type": "number",
+      "default": 0
+    },
+    "lastLogin": {
+      "type": "date"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string"
+    },
+    "devices": {
+      "type": "array"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    },
+    "preset": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "CustomerToken",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "cskh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "ketoan",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "daily",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": ["enter", "verifyOTP", "checkUsername", "onBank", "onMomo", "enterGuest", "register", "renew"]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": ["mo"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["listen", "getMe", "loginTVQR", "exit", "ping", "watching", "startWatching", "enterPRCode"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW",
+      "property": ["exit"]
+    }
+  ],
+  "methods": {}
+}

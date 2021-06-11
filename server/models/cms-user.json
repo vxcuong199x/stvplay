@@ -1,0 +1,109 @@
+{
+  "name": "CmsUser",
+  "plural": "cms-user",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true
+  },
+  "properties": {
+    "email": {
+      "type": "String",
+      "required": false
+    },
+    "dtId": {
+      "type": "number"
+    },
+    "spId": {
+      "type": "number"
+    },
+    "pnId": {
+      "type": "number"
+    },
+    "coin": {
+      "type": "number",
+      "default": 0
+    },
+    "type": {
+      "type": "number",
+      "default": 1,
+      "comment": "1: npp, 2: daily, 3: cskh, 4: ketoan, 5: vh, 6: partner, 7: content"
+    },
+    "lastLogin": {
+      "type": "Date"
+    },
+    "lastIp": {
+      "type": "String"
+    },
+    "phone": {
+      "type": "String"
+    },
+    "otp": {
+      "type": "String"
+    },
+    "session": {
+      "type": "String"
+    },
+    "token": {
+      "type": "String"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW",
+      "property": ["changePassword", "addCoinDaily", "addCoinUser"]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "daily",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "daily",
+      "permission": "ALLOW",
+      "property": ["changePassword", "addCoinUser"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": ["verifyOTP"]
+    }
+  ],
+  "methods": {}
+}

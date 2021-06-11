@@ -1,0 +1,17 @@
+[
+  {
+    "name": "push-online",
+    "script": "./server/push-online.js",
+    "error_file": "./log/push-err.log",
+    "out_file": "./log/push-out.log",
+    "pid_file": "./log/push.pid",
+    "exec_mode": "fork_mode", //cluster_mode
+    "instances" : "1",
+    "watch": true,
+    "ignore_watch": ["log", "node_modules"],
+    "max_memory_restart" : "800M",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+]

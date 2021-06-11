@@ -1,0 +1,267 @@
+{
+  "name": "Clip",
+  "plural": "clip",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "homeOrder": {
+      "keys": {
+        "activated": 1,
+        "homeOrder": 1
+      }
+    },
+    "catalog": {
+      "keys": {
+        "movieCatalogIds": 1,
+        "activated": 1,
+        "createdAt": -1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll",
+        "__get__episodes",
+        "__create__episodes",
+        "__delete__episodes",
+        "__findById__episodes",
+        "__destroyById__episodes",
+        "__updateById__episodes",
+        "__count__episodes",
+        "__link__catalogs",
+        "__unlink__catalogs",
+        "__count__catalogs",
+        "__findById__catalogs"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        },
+        "order": "createdAt DESC"
+      }
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "DefaultFindField": {
+      "fields": [
+        "id",
+        "name",
+        "type",
+        "keywords",
+        "thumbnail",
+        "viewerCount",
+        "hd",
+        "imdb",
+        "banner",
+        "episodeCount",
+        "totalEpisodes",
+        "updatedAt",
+        "duration"
+      ]
+    },
+    "Cache": {
+      "type": "redis",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById",
+        "getRelate"
+      ]
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "oldId": {
+      "type": "string"
+    },
+    "releaseYear": {
+      "type": "number"
+    },
+    "info": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "source": {
+      "type": "string"
+    },
+    "thumbnail": {
+      "type": "object"
+    },
+    "banner": {
+      "type": [
+        "number"
+      ]
+    },
+    "largeBanner": {
+      "type": [
+        "number"
+      ]
+    },
+    "packageCode": {
+      "type": "string",
+      "default": "FREE"
+    },
+    "actors": {
+      "type": [
+        "string"
+      ]
+    },
+    "price": {
+      "type": "number",
+      "default": 0
+    },
+    "keywords": {
+      "type": [
+        "string"
+      ]
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": 1,
+      "comment": "1: phim lẻ, 2: phim bộ"
+    },
+    "episodeCount": {
+      "type": "number",
+      "default": 0
+    },
+    "totalEpisodes": {
+      "type": "number",
+      "default": 0
+    },
+    "viewerCount": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "buyCount": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "subscriberCount": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "activated": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "activatedStore": {
+      "type": "boolean",
+      "default": true
+    },
+    "hd": {
+      "type": "boolean",
+      "default": false
+    },
+    "resolution": {
+      "type": "string",
+      "default": "HD"
+    },
+    "homeOrder": {
+      "type": "number",
+      "default": 0
+    },
+    "showPhoneInterval": {
+      "type": "number",
+      "default": 0
+    },
+    "showPhoneTime": {
+      "type": "number",
+      "default": 0
+    },
+    "cmsUser": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number",
+      "default": 10,
+      "comment": "Số phút của phim, hoặc tập phim"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "catalogs": {
+      "type": "referencesMany",
+      "model": "ClipCatalog",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "episodes": {
+      "type": "hasMany",
+      "model": "ClipEpisode"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["updateState","buyClipBank","buyClipMomo","buyClipCard","buyClipCoin", "buyClipVerifyMomo"]
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,83 @@
+{
+  "name": "Ads",
+  "plural": "ads",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "getAds": {
+      "keys": {
+        "runIn": 1,
+        "activated": 1,
+        "updatedAt": -1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    },
+    "ResultsetLimit": {
+      "limit": 200
+    },
+    "DefaultFilter": {
+      "filter": {
+        "where": {
+          "activated": true
+        }
+      }
+    },
+    "Cache": {
+      "type": "memcache",
+      "expire": 180,
+      "methods": [
+        "find",
+        "findById"
+      ]
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "comment": "facebook|adSense"
+    },
+    "data": {
+      "type": "any",
+      "comment": "facebook: [{type, id, time}], adSense: { url: '...' }"
+    },
+    "runIn": {
+      "type": "string",
+      "comment": "channel|movie|clip"
+    },
+    "catalogIds": {
+      "type": "array"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ]
+}

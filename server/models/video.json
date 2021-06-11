@@ -1,0 +1,121 @@
+{
+  "name": "Video",
+  "plural": "video",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "ouputIndex": {
+      "keys": {
+        "output": 1
+      },
+      "options": {
+        "unique": true
+      }
+    },
+    "nameIndex": {
+      "keys": {
+        "name": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true,
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 200
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "input": {
+      "type": "string",
+      "required": true
+    },
+    "output": {
+      "type": "string",
+      "required": true
+    },
+    "result": {
+      "type": "string"
+    },
+    "codec": {
+      "type": "string",
+      "required": true
+    },
+    "drm": {
+      "type": "string",
+      "required": true
+    },
+    "profiles": {
+      "type": "array"
+    },
+    "progress": {
+      "type": "number",
+      "required": true,
+      "default": -1
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 0,
+      "comment": "0: not used, 1: used"
+    },
+    "contentType": {
+      "type": "number"
+    },
+    "contentName": {
+      "type": "string"
+    },
+    "contentId": {
+      "type": "any"
+    },
+    "episode": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ]
+}

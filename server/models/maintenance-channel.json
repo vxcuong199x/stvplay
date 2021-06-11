@@ -1,0 +1,68 @@
+{
+  "name": "MaintenanceChannel",
+  "plural": "maintenance-channel",
+  "base": "PersistedModel",
+  "strict": true,
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "StaticUpdate": true,
+    "ResultsetLimit": {
+      "limit": 200
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "channelId": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "prepareChannelId": {
+      "type": "string"
+    },
+    "start": {
+      "type": "date"
+    },
+    "end": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

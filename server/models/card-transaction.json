@@ -1,0 +1,73 @@
+{
+  "name": "CardTransaction",
+  "plural": "card-transaction",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {}
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "dtId": {
+      "type": "number",
+      "default": 1
+    },
+    "spId": {
+      "type": "number",
+      "default": 1
+    },
+    "telco": {
+      "type": "number",
+      "default": 1
+    },
+    "serial": {
+      "type": "string"
+    },
+    "pin": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "time": {
+      "type": "date"
+    },
+    "day": {
+      "type": "number"
+    },
+    "status": {
+      "type": "number",
+      "default": 1
+    },
+    "ec": {
+      "type": "string",
+      "default": "00"
+    },
+    "response": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

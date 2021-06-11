@@ -1,0 +1,26 @@
+{
+  "restApiRoot": "/api/v1",
+  "host": "0.0.0.0",
+  "port": 8000,
+  "httpPort": 8000,
+  "httpsPort": 8004,
+  "pushInAppPort": 8001,
+  "pushOnlinePort": 8002,
+  "remoting": {
+    "context": false,
+    "rest": {
+      "handleErrors": true,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": true,
+      "limit": "10kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "10kb"
+    },
+    "cors": false
+  }
+}

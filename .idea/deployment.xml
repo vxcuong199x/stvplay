@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="STV_PLAY_APP">
+    <serverData>
+      <paths name="STV_PLAY_APP">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/dev/stvplay" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/home/dev/stvplay/node_modules" />
+            <excludedPath path="/home/dev/stvplay/log" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

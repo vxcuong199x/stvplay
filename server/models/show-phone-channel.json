@@ -1,0 +1,65 @@
+{
+  "name": "ShowPhoneChannel",
+  "plural": "show-phone-channel",
+  "base": "PersistedModel",
+  "strict": true,
+  "indexes": {
+    "channelId": {
+      "keys": {
+        "channelId": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "mixins": {
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "@replaceById",
+        "updateAttributes",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 200
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "channelId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,175 @@
+{
+  "name": "Transaction",
+  "plural": "transaction",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "userIndex": {
+      "keys": {
+        "username": 1,
+        "createdAt": 1
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "time": {
+      "type": "date",
+      "required": true
+    },
+    "package": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "number",
+      "default": 1,
+      "comment": "card: 1, coin: 2, gift-code: 3, bank: 4"
+    },
+    "contentType": {
+      "type": "number",
+      "default": 1,
+      "comment": "1: package, 2: movie, 3: clip"
+    },
+    "platform": {
+      "type": "number",
+      "default": 2
+    },
+    "deviceType": {
+      "type": "number",
+      "default": 1
+    },
+    "dtId": {
+      "type": "number",
+      "default": 1
+    },
+    "spId": {
+      "type": "number",
+      "default": 1
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "default": 0
+    },
+    "month": {
+      "type": "number",
+      "default": 1
+    },
+    "day": {
+      "type": "number",
+      "default": 1
+    },
+    "maxDevice": {
+      "type": "number",
+      "default": 1
+    },
+    "amount": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number"
+    },
+    "coin": {
+      "type": "number"
+    },
+    "after": {
+      "type": "number"
+    },
+    "telco": {
+      "type": "number"
+    },
+    "serial": {
+      "type": "string"
+    },
+    "pin": {
+      "type": "string"
+    },
+    "giftCode": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "vh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "npp",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "daily",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "cskh",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "ketoan",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

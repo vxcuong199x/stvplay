@@ -1,0 +1,65 @@
+{
+  "name": "Admin",
+  "plural": "admin",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "StaticUpdate": true
+  },
+  "properties": {
+    "email": {
+      "type": "String",
+      "required": false
+    },
+    "lastLogin": {
+      "type": "Date"
+    },
+    "lastIp": {
+      "type": "String"
+    },
+    "phone": {
+      "type": "String"
+    },
+    "otp": {
+      "type": "String"
+    },
+    "session": {
+      "type": "String"
+    },
+    "token": {
+      "type": "String"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": ["verifyOTP"]
+    }
+  ],
+  "methods": {}
+}

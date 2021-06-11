@@ -1,0 +1,82 @@
+{
+  "name": "FreeMac",
+  "plural": "free-mac",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {
+    "macIndex": {
+      "keys": {
+        "mac": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "CmsLog": {},
+    "RemoteRouting": {
+      "only": [
+        "@find",
+        "@findOne",
+        "@create",
+        "@findById",
+        "@count",
+        "@deleteById",
+        "updateAttributes",
+        "@replaceById",
+        "@updateAll"
+      ]
+    },
+    "ResultsetLimit": {
+      "limit": 50
+    },
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true
+    }
+  },
+  "properties": {
+    "mac": {
+      "type": "string",
+      "required": true
+    },
+    "freeMonth": {
+      "type": "number",
+      "required": true
+    },
+    "dtId": {
+      "type": "number"
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "activated": {
+      "type": "boolean",
+      "default": true
+    },
+    "status": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ]
+}

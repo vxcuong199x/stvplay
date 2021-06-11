@@ -1,0 +1,19 @@
+[
+  {
+    "name": "ping",
+    "script": ".",
+    "error_file": "./log/ping-err.log",
+    "out_file": "./log/ping-out.log",
+    "pid_file": "./log/ping.pid",
+    "exec_mode": "cluster_mode", //cluster_mode
+    "instances" : "max",
+    "watch": true,
+    "ignore_watch": ["log", "node_modules"],
+    "max_memory_restart" : "800M",
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": 8003,
+      "NOT_LOGGING": true
+    }
+  }
+]
